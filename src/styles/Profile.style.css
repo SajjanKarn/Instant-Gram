@@ -1,0 +1,34 @@
+.profile {
+  display: flex;
+  align-items: center;
+}
+.profile-image {
+  width: 220px;
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+}
+
+.user-info {
+  margin: 0px 50px;
+}
+
+.user-posts-image {
+  width: 300px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 478px) {
+  .profile {
+    flex-direction: column;
+  }
+  .user-info {
+    margin: 15px 0px;
+    text-align: center;
+  }
+  .user-followers {
+    font-size: 1.1rem;
+  }
+}
