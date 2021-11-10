@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -17,13 +19,50 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(credentials);
+    if (credentials.password !== credentials.confirmPassword) {
+      toast.error("Passwords do not match!");
+      return;
+    }
+
+    const registerCredentials = { ...credentials, confirmPassword: undefined };
+
+    fetch(`http://localhost:8000/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(registerCredentials),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (!result.error) {
+          toast.success("Register Success.");
+        } else {
+          toast.error(result.error);
+        }
+      });
   };
 
   return (
     <div>
+      <ToastContainer />
       <h3>Register </h3>
       <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="nameInput" className="form-label mt-4">
+            Full Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="nameInput"
+            placeholder="John Doe"
+            name="name"
+            value={credentials.name}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="emailInput" className="form-label mt-4">
             Email address

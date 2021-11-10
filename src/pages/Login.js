@@ -1,6 +1,8 @@
 import { createRef } from "react";
 import { Link } from "react-router-dom";
 
+import { ToastContainer, toast } from "react-toastify";
+
 const Login = () => {
   const emailRef = createRef();
   const passwordRef = createRef();
@@ -8,11 +10,40 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(emailRef.current.value, passwordRef.current.value);
+    fetch(`http://localhost:8000/signin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (!result.error) {
+          toast.success("Logged In");
+        } else {
+          toast.error(result.error);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className="login-page">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <h3>Login </h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
