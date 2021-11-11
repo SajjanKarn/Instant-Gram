@@ -19,22 +19,24 @@ export const AuthContextProvider = ({ children }) => {
       return;
     }
 
-    const res = await fetch(`http://localhost:8000/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    const result = await res.json();
+    try {
+      const res = await fetch(`http://localhost:8000/me`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const result = await res.json();
 
-    console.log(result);
-
-    if (!result.error) {
-      navigate("/");
-      setUser(result);
-    } else {
-      navigate("/login", { replace: true });
+      if (!result.error) {
+        navigate("/");
+        setUser(result);
+      } else {
+        navigate("/login", { replace: true });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
