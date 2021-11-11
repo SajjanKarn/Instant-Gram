@@ -1,9 +1,11 @@
 import { createRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const emailRef = createRef();
   const passwordRef = createRef();
 
@@ -23,7 +25,14 @@ const Login = () => {
       .then((res) => res.json())
       .then((result) => {
         if (!result.error) {
+          localStorage.setItem("token", result.token);
+          localStorage.setItem("user", JSON.stringify(result.user));
           toast.success("Logged In");
+
+          // redirect to homea after 2s.
+          setTimeout(() => {
+            navigate("/", { replace: true });
+          }, 2000);
         } else {
           toast.error(result.error);
         }
@@ -33,17 +42,7 @@ const Login = () => {
 
   return (
     <div className="login-page">
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+      <ToastContainer autoClose={2500} />
       <h3>Login </h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
