@@ -1,9 +1,12 @@
-import AuthContext from "context/AuthContext";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import AuthContext from "context/AuthContext";
 
 const Navbar = ({ title }) => {
-  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(AuthContext);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
@@ -35,6 +38,18 @@ const Navbar = ({ title }) => {
                   <Link className="nav-link" to="/profile">
                     Profile
                   </Link>
+                </li>
+                <li className="nav-item">
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      localStorage.clear();
+                      setUser(null);
+                      navigate("/login");
+                    }}
+                  >
+                    Logout
+                  </button>
                 </li>
               </>
             ) : (

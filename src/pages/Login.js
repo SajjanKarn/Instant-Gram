@@ -1,9 +1,11 @@
-import { createRef } from "react";
+import AuthContext from "context/AuthContext";
+import { createRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
+  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const emailRef = createRef();
@@ -28,7 +30,7 @@ const Login = () => {
           localStorage.setItem("token", result.token);
           localStorage.setItem("user", JSON.stringify(result.user));
           toast.success("Logged In");
-
+          setUser(result.user);
           // redirect to homea after 2s.
           setTimeout(() => {
             navigate("/", { replace: true });
