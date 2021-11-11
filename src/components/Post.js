@@ -1,6 +1,37 @@
+import AuthContext from "context/AuthContext";
+import { useContext } from "react";
 import "styles/Post.component.css";
 
-const Post = ({ post }) => {
+const Post = ({ post, posts, setPosts }) => {
+  const { user } = useContext(AuthContext);
+
+  const likeTweet = async (id) => {
+    try {
+      const res = await fetch(`http://localhost:8000/like`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ postId: id }),
+      });
+      const result = await res.json();
+
+      // generate new post data.
+      const newPostData = posts.map((postItem) => {
+        if (postItem._id === result._id) {
+          return result;
+        } else {
+          return postItem;
+        }
+      });
+
+      // re-render post data.
+      setPosts(newPostData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="post-card">
       <div className="post-card-user">
@@ -14,8 +45,21 @@ const Post = ({ post }) => {
         />
       </div>
       <div className="likes">
-        <i className="fa fa-heart liked" aria-hidden="true"></i>
+        {!post.likes.includes(user?._id) ? (
+          <i
+            className="fa fa-heart-o"
+            aria-hidden="true"
+            onClick={() => likeTweet(post._id)}
+          ></i>
+        ) : (
+          <i
+            className="fa fa-heart liked"
+            aria-hidden="true"
+            onClick={() => likeTweet(post._id)}
+          ></i>
+        )}
       </div>
+      <p>{post.likes.length} likes</p>
       <div className="post-card-title my-2">
         <h4>{post.title}</h4>
       </div>
