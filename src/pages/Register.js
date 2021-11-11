@@ -31,7 +31,7 @@ const Register = () => {
     setLoading(true);
     const registerCredentials = { ...credentials, confirmPassword: undefined };
 
-    fetch(`http://localhost:8000/signup`, {
+    fetch(`https://instant-gram-backend.herokuapp.com/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,6 +48,7 @@ const Register = () => {
           }, 3000);
         } else {
           toast.error(result.error);
+          setLoading(true);
         }
       });
   };

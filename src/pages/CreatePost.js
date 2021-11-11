@@ -16,7 +16,7 @@ const CreatePost = () => {
   useEffect(() => {
     if (imageURL) {
       // now send request to the backend.
-      fetch(`http://localhost:8000/createpost`, {
+      fetch(`https://instant-gram-backend.herokuapp.com/createpost`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

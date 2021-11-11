@@ -10,7 +10,7 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUserPosts = () => {
-      fetch(`http://localhost:8000/mypost`, {
+      fetch(`https://instant-gram-backend.herokuapp.com/mypost`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -43,9 +43,9 @@ const Profile = () => {
               <h3>{!user ? "" : user.name}</h3>
 
               <div className="user-followers">
-                <p className="font-weight-bold">40 Posts</p>
-                <p className="font-weight-bold">469 Follower</p>
-                <p className="font-weight-bold">65 Following</p>
+                <p className="font-weight-bold">{userPost.length} Posts</p>
+                <p className="font-weight-bold">0 Follower</p>
+                <p className="font-weight-bold">0 Following</p>
               </div>
             </div>
           </div>

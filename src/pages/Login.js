@@ -14,7 +14,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch(`http://localhost:8000/signin`, {
+    fetch(`https://instant-gram-backend.herokuapp.com/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

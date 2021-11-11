@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     try {
-      const res = await fetch(`http://localhost:8000/me`, {
+      const res = await fetch(`https://instant-gram-backend.herokuapp.com/me`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
