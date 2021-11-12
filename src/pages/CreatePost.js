@@ -34,6 +34,7 @@ const CreatePost = () => {
             }, 2000);
           } else {
             toast.error(result.error);
+            setLoading(false);
           }
         })
         .catch((err) => console.log(err));

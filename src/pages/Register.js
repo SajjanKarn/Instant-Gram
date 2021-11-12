@@ -48,7 +48,7 @@ const Register = () => {
           }, 3000);
         } else {
           toast.error(result.error);
-          setLoading(true);
+          setLoading(false);
         }
       });
   };
