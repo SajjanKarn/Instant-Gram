@@ -47,8 +47,8 @@ const Register = () => {
             navigate("/login", { replace: true });
           }, 3000);
         } else {
-          toast.error(result.error);
           setLoading(false);
+          toast.error(result.error);
         }
       });
   };
