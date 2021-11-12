@@ -10,7 +10,7 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUserPosts = () => {
-      fetch(`https://instant-gram-backend.herokuapp.com/mypost`, {
+      fetch(`http://localhost:8000/mypost`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

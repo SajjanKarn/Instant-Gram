@@ -10,17 +10,14 @@ const Post = ({ post, posts, setPosts }) => {
   // like tweet
   const likeTweet = async (id) => {
     try {
-      const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/like`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({ postId: id }),
-        }
-      );
+      const res = await fetch(`http://localhost:8000/like`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ postId: id }),
+      });
       const result = await res.json();
 
       // generate new post data.
@@ -42,17 +39,14 @@ const Post = ({ post, posts, setPosts }) => {
   // post comment
   const postComment = async (comment, postId) => {
     try {
-      const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/comment`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({ comment, postId }),
-        }
-      );
+      const res = await fetch(`http://localhost:8000/comment`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ comment, postId }),
+      });
       const result = await res.json();
 
       if (!result.error) {
@@ -76,12 +70,59 @@ const Post = ({ post, posts, setPosts }) => {
     }
   };
 
+  // delete post
+  const deletePost = async (postId) => {
+    const confirmAction = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+    if (confirmAction) {
+      if (!postId) {
+        toast.error("PostID is required to delete a post!");
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:8000/delete/${postId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        const result = await res.json();
+
+        if (!result.error) {
+          const newPostData = posts.filter((postItem) => {
+            return postItem._id !== result._id;
+          });
+          setPosts(newPostData);
+          toast.success("Deleted Post 💀");
+        } else {
+          toast.error(result.error);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <>
       <ToastContainer autoClose={2300} />
       <div className="post-card">
-        <div className="post-card-user">
+        <div
+          className="post-card-user d-flex my-2"
+          style={{ justifyContent: "space-between", alignItems: "center" }}
+        >
           <h3>{post.postedBy.name}</h3>
+
+          {user?._id === post.postedBy._id && (
+            <button
+              className="btn btn-danger btn-sm"
+              onClick={() => deletePost(post._id)}
+            >
+              <i className="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          )}
         </div>
         <div className="img-wrapper text-center">
           <img

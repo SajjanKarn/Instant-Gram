@@ -31,7 +31,7 @@ const Register = () => {
     setLoading(true);
     const registerCredentials = { ...credentials, confirmPassword: undefined };
 
-    fetch(`https://instant-gram-backend.herokuapp.com/signup`, {
+    fetch(`http://localhost:8000/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
