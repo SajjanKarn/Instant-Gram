@@ -1,5 +1,6 @@
 import AuthContext from "context/AuthContext";
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "styles/Post.component.css";
 
@@ -113,7 +114,17 @@ const Post = ({ post, posts, setPosts }) => {
           className="post-card-user d-flex my-2"
           style={{ justifyContent: "space-between", alignItems: "center" }}
         >
-          <h3>{post.postedBy.name}</h3>
+          <h3>
+            <Link
+              to={
+                post.postedBy._id === user?._id
+                  ? `/profile`
+                  : `/profile/${post.postedBy._id}`
+              }
+            >
+              {post.postedBy.name}
+            </Link>
+          </h3>
 
           {user?._id === post.postedBy._id && (
             <button
