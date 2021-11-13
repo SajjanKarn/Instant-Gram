@@ -36,7 +36,11 @@ const Profile = () => {
             <img
               className="img-fluid rounded-circle profile-image"
               alt="profile"
-              src={userPost[0]?.imageURL}
+              src={
+                userPost[0]?.imageURL
+                  ? userPost[0]?.imageURL
+                  : "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
+              }
             />
 
             <div className="user-info">
