@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export const AuthContextProvider = ({ children }) => {
       const result = await res.json();
 
       if (!result.error) {
-        navigate("/");
+        navigate(location.pathname ? location.pathname : "/");
         setUser(result);
       } else {
         navigate("/login", { replace: true });
