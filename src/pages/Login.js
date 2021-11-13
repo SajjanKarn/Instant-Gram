@@ -1,11 +1,11 @@
 import AuthContext from "context/AuthContext";
+import ToastContext from "context/ToastProvider";
 import { createRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { ToastContainer, toast } from "react-toastify";
-
 const Login = () => {
   const { setUser } = useContext(AuthContext);
+  const { toast } = useContext(ToastContext);
   const navigate = useNavigate();
 
   const emailRef = createRef();
@@ -31,10 +31,7 @@ const Login = () => {
           localStorage.setItem("user", JSON.stringify(result.user));
           toast.success("Logged In");
           setUser(result.user);
-          // redirect to homea after 2s.
-          setTimeout(() => {
-            navigate("/", { replace: true });
-          }, 2000);
+          navigate("/", { replace: true });
         } else {
           toast.error(result.error);
         }
@@ -44,7 +41,6 @@ const Login = () => {
 
   return (
     <div className="login-page">
-      <ToastContainer autoClose={2500} />
       <h3>Login </h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

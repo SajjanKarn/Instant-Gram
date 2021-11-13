@@ -48,8 +48,12 @@ const Profile = () => {
 
               <div className="user-followers">
                 <p className="font-weight-bold">{userPost.length} Posts</p>
-                <p className="font-weight-bold">0 Follower</p>
-                <p className="font-weight-bold">0 Following</p>
+                <p className="font-weight-bold">
+                  {user?.followers.length} Follower
+                </p>
+                <p className="font-weight-bold">
+                  {user?.following.length} Following
+                </p>
               </div>
             </div>
           </div>

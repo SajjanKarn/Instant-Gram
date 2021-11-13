@@ -1,9 +1,10 @@
 import Spinner from "components/Spinner";
-import { useState } from "react";
+import ToastContext from "context/ToastProvider";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
 
 const Register = () => {
+  const { toast } = useContext(ToastContext);
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
@@ -43,9 +44,7 @@ const Register = () => {
         if (!result.error) {
           setLoading(false);
           toast.success("Register Success.");
-          setTimeout(() => {
-            navigate("/login", { replace: true });
-          }, 3000);
+          navigate("/login", { replace: true });
         } else {
           setLoading(false);
           toast.error(result.error);
@@ -55,7 +54,6 @@ const Register = () => {
 
   return (
     <div>
-      <ToastContainer autoClose={2500} />
       {loading ? (
         <Spinner splash="Wait a few sec.. We are registering your account...." />
       ) : (

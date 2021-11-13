@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import AuthContext from "context/AuthContext";
+import ToastContext from "context/ToastProvider";
 
 const Navbar = ({ title }) => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
+  const { toast } = useContext(ToastContext);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -45,6 +47,7 @@ const Navbar = ({ title }) => {
                     onClick={() => {
                       localStorage.clear();
                       setUser(null);
+                      toast.success("Logged out ");
                       navigate("/login");
                     }}
                   >

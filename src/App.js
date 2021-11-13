@@ -11,20 +11,23 @@ import UserProfile from "pages/UserProfile";
 
 import { AuthContextProvider } from "context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastProvider } from "context/ToastProvider";
 
 const App = () => {
   return (
     <AuthContextProvider>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/create" element={<CreatePost />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/:userId" element={<UserProfile />} />
-        </Routes>
-      </Layout>
+      <ToastProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/create" element={<CreatePost />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:userId" element={<UserProfile />} />
+          </Routes>
+        </Layout>
+      </ToastProvider>
     </AuthContextProvider>
   );
 };

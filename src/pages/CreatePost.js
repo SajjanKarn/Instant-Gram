@@ -1,9 +1,10 @@
 import Spinner from "components/Spinner";
-import { useEffect, useState } from "react";
+import ToastContext from "context/ToastProvider";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { toast, ToastContainer } from "react-toastify";
 
 const CreatePost = () => {
+  const { toast } = useContext(ToastContext);
   const navigate = useNavigate();
   const [post, setPost] = useState({
     title: "",
@@ -29,9 +30,8 @@ const CreatePost = () => {
           if (!result.error) {
             toast.success("You post has been posted 😊");
             setLoading(false);
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
+
+            navigate("/");
           } else {
             toast.error(result.error);
             setLoading(false);
@@ -84,8 +84,6 @@ const CreatePost = () => {
   };
   return (
     <div className="create-post">
-      <ToastContainer autoClose={2500} />
-
       {loading ? (
         <Spinner splash="Posting..." />
       ) : (

@@ -1,11 +1,12 @@
 import AuthContext from "context/AuthContext";
+import ToastContext from "context/ToastProvider";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
 import "styles/Post.component.css";
 
 const Post = ({ post, posts, setPosts }) => {
   const { user } = useContext(AuthContext);
+  const { toast } = useContext(ToastContext);
   const [commentInput, setCommentInput] = useState("");
 
   // like tweet
@@ -117,7 +118,6 @@ const Post = ({ post, posts, setPosts }) => {
 
   return (
     <>
-      <ToastContainer autoClose={2300} />
       <div className="post-card">
         <div
           className="post-card-user d-flex my-2"
