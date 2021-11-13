@@ -7,6 +7,7 @@ import Register from "pages/Register";
 import Home from "pages/Home";
 import Profile from "pages/Profile";
 import CreatePost from "pages/CreatePost";
+import UserProfile from "pages/UserProfile";
 
 import { AuthContextProvider } from "context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/create" element={<CreatePost />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:userId" element={<UserProfile />} />
         </Routes>
       </Layout>
     </AuthContextProvider>
