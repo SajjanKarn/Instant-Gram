@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import moment from "moment";
+
 import AuthContext from "context/AuthContext";
 import ToastContext from "context/ToastProvider";
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 import "styles/Post.component.css";
 
 const Post = ({ post, posts, setPosts }) => {
@@ -142,6 +144,9 @@ const Post = ({ post, posts, setPosts }) => {
               <i className="fa fa-trash" aria-hidden="true"></i>
             </button>
           )}
+        </div>
+        <div className="postedAt">
+          <p>Posted {moment(post.createdAt).fromNow()}</p>
         </div>
         <div className="img-wrapper text-center">
           <img

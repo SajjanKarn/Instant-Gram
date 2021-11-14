@@ -32,6 +32,11 @@ const Navbar = ({ title }) => {
             {user ? (
               <>
                 <li className="nav-item">
+                  <Link className="nav-link" to="/followingpost">
+                    Followings Post
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to="/create">
                     Create Post
                   </Link>

@@ -12,6 +12,7 @@ import UserProfile from "pages/UserProfile";
 import { AuthContextProvider } from "context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastProvider } from "context/ToastProvider";
+import FollowingPost from "pages/FollowingPost";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/create" element={<CreatePost />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/followingpost" element={<FollowingPost />} />
             <Route path="/profile/:userId" element={<UserProfile />} />
           </Routes>
         </Layout>

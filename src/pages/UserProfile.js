@@ -104,7 +104,6 @@ const UserProfile = () => {
                           className="btn btn-danger btn-md"
                           onClick={() => {
                             followUser(userProfile._id);
-                            toast.success(`Unfollowed ${userProfile.name}`);
                           }}
                         >
                           Unfollow{" "}
