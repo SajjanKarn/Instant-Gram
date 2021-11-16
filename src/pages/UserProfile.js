@@ -80,7 +80,7 @@ const UserProfile = () => {
                 <img
                   className="img-fluid rounded-circle profile-image"
                   alt="profile"
-                  src={userPost[0]?.imageURL}
+                  src={userProfile?.profileImage || userPost[0]?.imageURL}
                 />
 
                 <div className="user-info">

@@ -37,9 +37,8 @@ const Profile = () => {
               className="img-fluid rounded-circle profile-image"
               alt="profile"
               src={
-                userPost[0]?.imageURL
-                  ? userPost[0]?.imageURL
-                  : "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
+                user?.profileImage ||
+                "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
               }
             />
 

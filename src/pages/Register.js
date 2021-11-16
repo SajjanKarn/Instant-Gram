@@ -1,6 +1,6 @@
 import Spinner from "components/Spinner";
 import ToastContext from "context/ToastProvider";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -14,6 +14,8 @@ const Register = () => {
     confirmPassword: "",
   });
   const [loading, setLoading] = useState(false);
+  const [imageURL, setImageURL] = useState("");
+  const [file, setFile] = useState();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -21,6 +23,36 @@ const Register = () => {
     setCredentials({ ...credentials, [name]: value });
   };
 
+  useEffect(() => {
+    if (imageURL) {
+      const registerCredentials = {
+        ...credentials,
+        profileImage: imageURL,
+        confirmPassword: undefined,
+      };
+
+      fetch(`https://instant-gram-backend.herokuapp.com/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registerCredentials),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (!result.error) {
+            setLoading(false);
+            toast.success("Register Success.");
+            navigate("/login", { replace: true });
+          } else {
+            setLoading(false);
+            toast.error(result.error);
+          }
+        });
+    }
+  }, [imageURL]);
+
+  // form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -29,27 +61,36 @@ const Register = () => {
       return;
     }
 
-    setLoading(true);
-    const registerCredentials = { ...credentials, confirmPassword: undefined };
+    if (!file.type.includes("image/")) {
+      toast.error("File must be a image file!");
+      return;
+    }
+    if (file.size > 8388608) {
+      // bytes.
+      toast.error("Image must be less than 8mb");
+      return;
+    }
 
-    fetch(`https://instant-gram-backend.herokuapp.com/signup`, {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "instant-gram-clone");
+    data.append("cloud_name", "dvhdpzlkq");
+
+    fetch(`https://api.cloudinary.com/v1_1/dvhdpzlkq/image/upload`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(registerCredentials),
+      body: data,
     })
       .then((res) => res.json())
       .then((result) => {
         if (!result.error) {
-          setLoading(false);
-          toast.success("Register Success.");
-          navigate("/login", { replace: true });
+          setImageURL(result.secure_url);
         } else {
-          setLoading(false);
-          toast.error(result.error);
+          toast.error("cannot upload photo at the moment");
         }
-      });
+      })
+      .catch((err) => console.log(err));
+
+    setLoading(true);
   };
 
   return (
@@ -88,6 +129,19 @@ const Register = () => {
                 name="email"
                 value={credentials.email}
                 onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="custom-file my-2">
+              <label className="custom-file-label mx-2" htmlFor="photoInput">
+                Choose Profile Image
+              </label>
+              <input
+                type="file"
+                className="custom-file-input btn btn-success"
+                id="photoInput"
+                accept="image/*"
+                onChange={(e) => setFile(e.target.files[0])}
                 required
               />
             </div>

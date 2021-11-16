@@ -34,7 +34,7 @@ const FollowingPost = () => {
         <Spinner splash="Loading Following posts...." />
       ) : (
         <>
-          <h3 className="welcome-text">Welcome {user?.name} 👋</h3>
+          <h3 className="welcome-text">Your Followings 📰</h3>
           {!posts.length && <h4>You haven't followed any users yet. 😢</h4>}
         </>
       )}

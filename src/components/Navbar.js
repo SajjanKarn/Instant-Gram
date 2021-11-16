@@ -1,11 +1,13 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import AuthContext from "context/AuthContext";
 import ToastContext from "context/ToastProvider";
 
 const Navbar = ({ title }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { user, setUser } = useContext(AuthContext);
   const { toast } = useContext(ToastContext);
 
@@ -32,17 +34,32 @@ const Navbar = ({ title }) => {
             {user ? (
               <>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/followingpost">
+                  <Link
+                    className={`nav-link ${
+                      location.pathname === "/followingpost" && "active"
+                    }`}
+                    to="/followingpost"
+                  >
                     Followings Post
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/create">
+                  <Link
+                    className={`nav-link ${
+                      location.pathname === "/create" && "active"
+                    }`}
+                    to="/create"
+                  >
                     Create Post
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/profile">
+                  <Link
+                    className={`nav-link ${
+                      location.pathname === "/profile" && "active"
+                    }`}
+                    to="/profile"
+                  >
                     Profile
                   </Link>
                 </li>
