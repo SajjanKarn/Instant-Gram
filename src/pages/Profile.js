@@ -1,6 +1,7 @@
 import Spinner from "components/Spinner";
 import AuthContext from "context/AuthContext";
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "styles/Profile.style.css";
 
 const Profile = () => {
@@ -54,6 +55,9 @@ const Profile = () => {
                   {user?.following.length} Following
                 </p>
               </div>
+              <Link className="btn btn-info" to="/changepassword">
+                Change Password
+              </Link>
             </div>
           </div>
           <hr />
