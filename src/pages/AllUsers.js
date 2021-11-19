@@ -16,12 +16,15 @@ const AllUsers = () => {
   const fetchUser = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:8000/allusers`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const res = await fetch(
+        `https://instant-gram-backend.herokuapp.com/allusers`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       const result = await res.json();
       if (!result.error) {
         setUsers(result.users.reverse());
