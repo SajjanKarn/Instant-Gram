@@ -118,6 +118,36 @@ const Post = ({ post, posts, setPosts }) => {
     }
   };
 
+  // delete comment
+  const deleteComment = async (postId, comment) => {
+    if (!window.confirm("are you sure you want to delete this comment ?")) {
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `https://instant-gram-backend.herokuapp.com/comment`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ commentId: comment._id, postId }),
+        }
+      );
+      const result = await res.json();
+      if (!result.error) {
+        setPosts(result.posts);
+        toast.success("deleted comment!");
+      } else {
+        toast.error(result.error);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <div className="post-card">
@@ -180,9 +210,18 @@ const Post = ({ post, posts, setPosts }) => {
         {post.comments && (
           <div className="comment my-2">
             {post.comments.map((comment) => (
-              <p key={comment._id} className="text-black">
-                <strong>{comment.postedBy.name}</strong>: {comment.comment}
-              </p>
+              <div className="comment-box">
+                <p key={comment._id} className="text-black">
+                  <strong>{comment.postedBy.name}</strong>: {comment.comment}
+                </p>
+                {user?._id === comment.postedBy._id && (
+                  <i
+                    className="fa fa-trash comment-delete"
+                    onClick={() => deleteComment(post._id, comment)}
+                    aria-hidden="true"
+                  ></i>
+                )}
+              </div>
             ))}
           </div>
         )}

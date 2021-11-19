@@ -12,3 +12,14 @@
 .card {
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2) !important;
 }
+
+.comment-box {
+  display: flex;
+}
+
+.comment-delete {
+  color: rgb(219, 66, 66);
+  margin: 0px 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}

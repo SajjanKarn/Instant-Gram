@@ -55,6 +55,7 @@ const Profile = () => {
                   {user?.following.length} Following
                 </p>
               </div>
+
               <Link className="btn btn-info" to="/changepassword">
                 Change Password
               </Link>

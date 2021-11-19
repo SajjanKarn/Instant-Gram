@@ -14,6 +14,7 @@ import UserProfile from "pages/UserProfile";
 import FollowingPost from "pages/FollowingPost";
 import ChangePassword from "pages/ChangePassword";
 import SearchUser from "pages/SearchUser";
+import AllUsers from "pages/AllUsers";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/followingpost" element={<FollowingPost />} />
             <Route path="/search" element={<SearchUser />} />
+            <Route path="/allusers" element={<AllUsers />} />
             <Route path="/changepassword" element={<ChangePassword />} />
             <Route path="/profile/:userId" element={<UserProfile />} />
           </Routes>

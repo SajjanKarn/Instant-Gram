@@ -54,6 +54,10 @@ const SearchUser = () => {
   };
   return (
     <div className="search-page">
+      <Link to="/allusers" className="btn btn-info my-2">
+        See All Users
+      </Link>
+
       <h3>Search User By Names </h3>
       <form className="d-flex" onSubmit={handleSubmit}>
         <input
@@ -79,7 +83,7 @@ const SearchUser = () => {
             <h3 className="my-3">No Result found for {searchInput}</h3>
           )}
           {searchResults.map((user) => (
-            <div class="card text-white bg-primary mb-3">
+            <div class="card text-white bg-primary mb-3" key={user._id}>
               <div class="card-body">
                 {/* Joined {moment(user.createdAt).fromNow()} */}
                 <h4 class="card-title">{user.name}</h4>
