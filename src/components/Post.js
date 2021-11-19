@@ -138,8 +138,7 @@ const Post = ({ post, posts, setPosts }) => {
       );
       const result = await res.json();
       if (!result.error) {
-        setPosts(result.posts);
-        toast.success("deleted comment!");
+        setPosts(result.posts.reverse());
       } else {
         toast.error(result.error);
       }

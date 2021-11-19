@@ -35,7 +35,12 @@ const FollowingPost = () => {
       ) : (
         <>
           <h3 className="welcome-text">Your Followings 📰</h3>
-          {!posts.length && <h4>You haven't followed any users yet. 😢</h4>}
+          {!posts.length && (
+            <h4 className="my-5">
+              You haven't followed any users yet or no posts found from the user
+              that you've followed. 😢
+            </h4>
+          )}
         </>
       )}
 
