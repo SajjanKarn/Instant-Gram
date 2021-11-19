@@ -1,13 +1,17 @@
 import Spinner from "components/Spinner";
 import AuthContext from "context/AuthContext";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "styles/Profile.style.css";
 
 const Profile = () => {
-  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const { user, setUser } = useContext(AuthContext);
   const [userPost, setUserPost] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [deletingUser, setDeletingUser] = useState(false);
 
   useEffect(() => {
     const fetchUserPosts = () => {
@@ -27,56 +31,96 @@ const Profile = () => {
     setLoading(true);
     fetchUserPosts();
   }, []);
+
+  const deleteProfile = async () => {
+    if (!window.confirm("Are you sure you want to delete your account ?")) {
+      return;
+    }
+    try {
+      setDeletingUser(true);
+      const res = await fetch(`http://localhost:8000/deleteuser`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const result = await res.json();
+      if (!result.error) {
+        setDeletingUser(false);
+        localStorage.clear();
+        setUser(null);
+        navigate("/login", { replace: true });
+        toast.success("Deleted Profile Successfully!");
+      } else {
+        toast.error(result.error);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="profile-page py-5">
       {loading ? (
         <Spinner splash="Loading Profile..." />
       ) : (
         <>
-          <div className="profile">
-            <img
-              className="img-fluid rounded-circle profile-image"
-              alt="profile"
-              src={
-                user?.profileImage ||
-                "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
-              }
-            />
-
-            <div className="user-info">
-              <h3>{!user ? "" : user.name}</h3>
-
-              <div className="user-followers">
-                <p className="font-weight-bold">{userPost.length} Posts</p>
-                <p className="font-weight-bold">
-                  {user?.followers.length} Follower
-                </p>
-                <p className="font-weight-bold">
-                  {user?.following.length} Following
-                </p>
-              </div>
-
-              <Link className="btn btn-info" to="/changepassword">
-                Change Password
-              </Link>
-            </div>
-          </div>
-          <hr />
-
-          <div className="user-posts row">
-            {userPost.map((post) => (
-              <div
-                key={post._id}
-                className="col-sm-12 col-md-6 col-lg-4 my-3 d-block text-center"
-              >
+          {deletingUser ? (
+            <Spinner splash="Wait a few sec.. we are deleting your account!" />
+          ) : (
+            <>
+              <div className="profile">
                 <img
-                  className="img-fluid user-posts-image"
-                  alt="user-posts"
-                  src={post.imageURL}
+                  className="img-fluid rounded-circle profile-image"
+                  alt="profile"
+                  src={
+                    user?.profileImage ||
+                    "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
+                  }
                 />
+
+                <div className="user-info">
+                  <h3>{!user ? "" : user.name}</h3>
+
+                  <div className="user-followers">
+                    <p className="font-weight-bold">{userPost.length} Posts</p>
+                    <p className="font-weight-bold">
+                      {user?.followers.length} Follower
+                    </p>
+                    <p className="font-weight-bold">
+                      {user?.following.length} Following
+                    </p>
+                  </div>
+
+                  <Link className="btn btn-info" to="/changepassword">
+                    Change Password
+                  </Link>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteProfile()}
+                  >
+                    Delete Profile
+                  </button>
+                </div>
               </div>
-            ))}
-          </div>
+              <hr />
+
+              <div className="user-posts row">
+                {userPost.map((post) => (
+                  <div
+                    key={post._id}
+                    className="col-sm-12 col-md-6 col-lg-4 my-3 d-block text-center"
+                  >
+                    <img
+                      className="img-fluid user-posts-image"
+                      alt="user-posts"
+                      src={post.imageURL}
+                    />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </>
       )}
     </div>
