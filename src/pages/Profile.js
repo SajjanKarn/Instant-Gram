@@ -38,12 +38,15 @@ const Profile = () => {
     }
     try {
       setDeletingUser(true);
-      const res = await fetch(`http://localhost:8000/deleteuser`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const res = await fetch(
+        `https://instant-gram-backend.herokuapp.com/deleteuser`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       const result = await res.json();
       if (!result.error) {
         setDeletingUser(false);
