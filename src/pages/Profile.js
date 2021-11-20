@@ -106,7 +106,7 @@ const Profile = () => {
                   <Link className="btn btn-info" to="/changepassword">
                     Change Password
                   </Link>
-                  <Link className="btn btn-warning mx-2" to="/changebio">
+                  <Link className="btn btn-warning mx-2 my-2" to="/changebio">
                     Change Bio
                   </Link>
                   <br />
