@@ -73,14 +73,22 @@ const Profile = () => {
           ) : (
             <>
               <div className="profile">
-                <img
-                  className="img-fluid rounded-circle profile-image"
-                  alt="profile"
-                  src={
-                    user?.profileImage ||
-                    "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
-                  }
-                />
+                <div>
+                  <img
+                    className="img-fluid rounded-circle profile-image"
+                    alt="profile"
+                    src={
+                      user?.profileImage ||
+                      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
+                    }
+                  />
+                  <p
+                    className="text-lead my-2 mx-2"
+                    style={{ maxWidth: "300px" }}
+                  >
+                    {user?.bio}
+                  </p>
+                </div>
 
                 <div className="user-info">
                   <h3>{!user ? "" : user.name}</h3>
@@ -98,8 +106,12 @@ const Profile = () => {
                   <Link className="btn btn-info" to="/changepassword">
                     Change Password
                   </Link>
+                  <Link className="btn btn-warning mx-2" to="/changebio">
+                    Change Bio
+                  </Link>
+                  <br />
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger my-2"
                     onClick={() => deleteProfile()}
                   >
                     Delete Profile
