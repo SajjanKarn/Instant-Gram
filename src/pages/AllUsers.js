@@ -1,4 +1,5 @@
 import Spinner from "components/Spinner";
+import AuthContext from "context/AuthContext";
 import ToastContext from "context/ToastProvider";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +8,7 @@ const AllUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const { user } = useContext(AuthContext);
   const { toast } = useContext(ToastContext);
 
   useEffect(() => {
@@ -53,17 +55,20 @@ const AllUsers = () => {
           ) : (
             <>
               <div>{users.length} Total users</div>
-              {users.map((user) => (
+              {users.map((userProfile) => (
                 <>
-                  <div class="card text-white bg-primary mb-3" key={user._id}>
+                  <div
+                    class="card text-white bg-primary mb-3"
+                    key={userProfile._id}
+                  >
                     <div class="card-body">
-                      {/* Joined {moment(user.createdAt).fromNow()} */}
-                      <h4 class="card-title">{user.name}</h4>
+                      {/* Joined {moment(userProfile.createdAt).fromNow()} */}
+                      <h4 class="card-title">{userProfile.name}</h4>
                       <div>
-                        {user.profileImage && (
+                        {userProfile.profileImage && (
                           <img
-                            src={user.profileImage}
-                            alt={user.name}
+                            src={userProfile.profileImage}
+                            alt={userProfile.name}
                             className="img-fluid my-2 search-profile-image"
                             width={100}
                             height={100}
@@ -71,7 +76,11 @@ const AllUsers = () => {
                         )}
                       </div>
                       <Link
-                        to={`/profile/${user._id}`}
+                        to={
+                          user?._id === userProfile._id
+                            ? `/profile`
+                            : `/profile/${userProfile._id}`
+                        }
                         className="btn btn-info"
                       >
                         Visit Profile

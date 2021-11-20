@@ -73,7 +73,7 @@ const Profile = () => {
           ) : (
             <>
               <div className="profile">
-                <div>
+                <div className="text-center">
                   <img
                     className="img-fluid rounded-circle profile-image"
                     alt="profile"

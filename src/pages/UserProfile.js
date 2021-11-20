@@ -76,12 +76,20 @@ const UserProfile = () => {
             <h3>No user found!</h3>
           ) : (
             <>
-              <div className="profile">
-                <img
-                  className="img-fluid rounded-circle profile-image"
-                  alt="profile"
-                  src={userProfile?.profileImage || userPost[0]?.imageURL}
-                />
+              <div className="profile text-center">
+                <div>
+                  <img
+                    className="img-fluid rounded-circle profile-image"
+                    alt="profile"
+                    src={userProfile?.profileImage || userPost[0]?.imageURL}
+                  />
+                  <p
+                    className="text-lead my-2 mx-2"
+                    style={{ maxWidth: "300px" }}
+                  >
+                    {userProfile?.bio}
+                  </p>
+                </div>
 
                 <div className="user-info">
                   <h3>{!userProfile ? "" : userProfile.name}</h3>
