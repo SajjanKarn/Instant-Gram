@@ -12,7 +12,7 @@ const Post = ({ post, posts, setPosts }) => {
   const [commentInput, setCommentInput] = useState("");
 
   // like tweet
-  const likeTweet = async (id) => {
+  const likePost = async (id) => {
     try {
       const res = await fetch(
         `https://instant-gram-backend.herokuapp.com/like`,
@@ -182,6 +182,15 @@ const Post = ({ post, posts, setPosts }) => {
             src={post.imageURL}
             className="img-fluid d-block mx-auto"
             alt="user-post"
+            onClick={(e) => {
+              switch (e.detail) {
+                case 2:
+                  likePost(post._id);
+                  break;
+                default:
+                  break;
+              }
+            }}
           />
         </div>
         <div className="likes">
@@ -189,13 +198,13 @@ const Post = ({ post, posts, setPosts }) => {
             <i
               className="fa fa-heart-o"
               aria-hidden="true"
-              onClick={() => likeTweet(post._id)}
+              onClick={() => likePost(post._id)}
             ></i>
           ) : (
             <i
               className="fa fa-heart liked"
               aria-hidden="true"
-              onClick={() => likeTweet(post._id)}
+              onClick={() => likePost(post._id)}
             ></i>
           )}
         </div>
