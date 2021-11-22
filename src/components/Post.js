@@ -196,7 +196,7 @@ const Post = ({ post, posts, setPosts }) => {
         <div className="likes">
           {!post.likes.includes(user?._id) ? (
             <i
-              className="fa fa-heart-o"
+              className="fa fa-heart-o animate__animated"
               aria-hidden="true"
               onClick={() => likePost(post._id)}
             ></i>
@@ -218,7 +218,7 @@ const Post = ({ post, posts, setPosts }) => {
         {post.comments && (
           <div className="comment my-2">
             {post.comments.map((comment) => (
-              <div className="comment-box">
+              <div className="comment-box animate__animated animate__fadeInDown">
                 <p key={comment._id} className="text-black">
                   <strong>{comment.postedBy.name}</strong>: {comment.comment}
                 </p>

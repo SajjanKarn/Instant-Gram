@@ -58,7 +58,7 @@ const AllUsers = () => {
               {users.map((userProfile) => (
                 <>
                   <div
-                    class="card text-white bg-primary mb-3"
+                    class="card text-white bg-primary mb-3 animate__animated animate__fadeInDown"
                     key={userProfile._id}
                   >
                     <div class="card-body">

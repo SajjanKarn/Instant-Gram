@@ -72,7 +72,7 @@ const Profile = () => {
             <Spinner splash="Wait a few sec.. we are deleting your account!" />
           ) : (
             <>
-              <div className="profile">
+              <div className="profile ">
                 <div className="text-center">
                   <img
                     className="img-fluid rounded-circle profile-image"
