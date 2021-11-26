@@ -15,11 +15,6 @@ export const AuthContextProvider = ({ children }) => {
   const checkUserLoggedIn = async () => {
     const token = localStorage.getItem("token");
 
-    if (!token) {
-      navigate("/login", { replace: true });
-      return;
-    }
-
     try {
       const res = await fetch(`https://instant-gram-backend.herokuapp.com/me`, {
         method: "GET",
@@ -42,7 +37,15 @@ export const AuthContextProvider = ({ children }) => {
           setUser(result);
         }
       } else {
-        navigate("/login", { replace: true });
+        if (
+          location.pathname === "/forgot-password" ||
+          location.pathname === "/register" ||
+          location.pathname.includes("/reset-password")
+        ) {
+          navigate(location.pathname, { replace: true });
+        } else {
+          navigate("/login", { replace: true });
+        }
       }
     } catch (err) {
       console.log(err);

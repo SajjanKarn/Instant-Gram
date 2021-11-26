@@ -16,6 +16,8 @@ import ChangePassword from "pages/ChangePassword";
 import SearchUser from "pages/SearchUser";
 import AllUsers from "pages/AllUsers";
 import ChangeBio from "pages/ChangeBio";
+import ForgotPassword from "pages/ForgotPassword";
+import ResetPassword from "pages/ResetPassword";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,6 +29,11 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route
+              path="/reset-password/:id/:token"
+              element={<ResetPassword />}
+            />
             <Route path="/register" element={<Register />} />
             <Route path="/create" element={<CreatePost />} />
             <Route path="/profile" element={<Profile />} />
