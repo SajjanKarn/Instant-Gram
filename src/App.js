@@ -18,6 +18,8 @@ import AllUsers from "pages/AllUsers";
 import ChangeBio from "pages/ChangeBio";
 import ForgotPassword from "pages/ForgotPassword";
 import ResetPassword from "pages/ResetPassword";
+import UserFollowers from "pages/UserFollower";
+import UserFollowing from "pages/UserFollowing";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -42,6 +44,8 @@ const App = () => {
             <Route path="/allusers" element={<AllUsers />} />
             <Route path="/changepassword" element={<ChangePassword />} />
             <Route path="/changebio" element={<ChangeBio />} />
+            <Route path="/myfollowers" element={<UserFollowers />} />
+            <Route path="/myfollowing" element={<UserFollowing />} />
             <Route path="/profile/:userId" element={<UserProfile />} />
           </Routes>
         </Layout>

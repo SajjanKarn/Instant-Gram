@@ -95,12 +95,16 @@ const Profile = () => {
 
                   <div className="user-followers">
                     <p className="font-weight-bold">{userPost.length} Posts</p>
-                    <p className="font-weight-bold">
-                      {user?.followers.length} Follower
-                    </p>
-                    <p className="font-weight-bold">
-                      {user?.following.length} Following
-                    </p>
+                    <Link to="/myfollowers">
+                      <p className="font-weight-bold">
+                        {user?.followers.length} Follower
+                      </p>
+                    </Link>
+                    <Link to="/myfollowing">
+                      <p className="font-weight-bold">
+                        {user?.following.length} Following
+                      </p>
+                    </Link>
                   </div>
 
                   <Link className="btn btn-info" to="/changepassword">
