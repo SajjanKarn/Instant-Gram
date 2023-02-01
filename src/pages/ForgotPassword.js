@@ -18,7 +18,7 @@ const ForgotPassword = () => {
     }
     setLoading(true);
     const res = await fetch(
-      `https://instant-gram-backend.herokuapp.com/forgot-password`,
+      `https://instant-gram-backend.onrender.com/forgot-password`,
       {
         method: "POST",
         headers: {

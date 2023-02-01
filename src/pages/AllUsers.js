@@ -19,7 +19,7 @@ const AllUsers = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/allusers`,
+        `https://instant-gram-backend.onrender.com/allusers`,
         {
           method: "GET",
           headers: {

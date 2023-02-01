@@ -19,7 +19,7 @@ const UserProfile = () => {
       const fetchUserPosts = async () => {
         setLoading(true);
         const res = await fetch(
-          `https://instant-gram-backend.herokuapp.com/user/${userId}`,
+          `https://instant-gram-backend.onrender.com/user/${userId}`,
           {
             method: "GET",
             headers: {
@@ -46,7 +46,7 @@ const UserProfile = () => {
   const followUser = async (userId) => {
     try {
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/follow`,
+        `https://instant-gram-backend.onrender.com/follow`,
         {
           method: "PUT",
           headers: {

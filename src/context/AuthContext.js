@@ -16,7 +16,7 @@ export const AuthContextProvider = ({ children }) => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`https://instant-gram-backend.herokuapp.com/me`, {
+      const res = await fetch(`https://instant-gram-backend.onrender.com/me`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

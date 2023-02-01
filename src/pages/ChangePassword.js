@@ -32,7 +32,7 @@ const ChangePassword = () => {
 
     try {
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/password`,
+        `https://instant-gram-backend.onrender.com/password`,
         {
           method: "PUT",
           headers: {

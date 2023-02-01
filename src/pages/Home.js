@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchAllPost = () => {
-      fetch(`https://instant-gram-backend.herokuapp.com/allpost`, {
+      fetch(`https://instant-gram-backend.onrender.com/allpost`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

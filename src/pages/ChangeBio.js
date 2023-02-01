@@ -21,7 +21,7 @@ const ChangeBio = () => {
 
     try {
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/updatebio`,
+        `https://instant-gram-backend.onrender.com/updatebio`,
         {
           method: "PUT",
           headers: {

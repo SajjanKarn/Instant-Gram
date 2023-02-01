@@ -15,7 +15,7 @@ const Post = ({ post, posts, setPosts }) => {
   const likePost = async (id) => {
     try {
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/like`,
+        `https://instant-gram-backend.onrender.com/like`,
         {
           method: "PUT",
           headers: {
@@ -47,7 +47,7 @@ const Post = ({ post, posts, setPosts }) => {
   const postComment = async (comment, postId) => {
     try {
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/comment`,
+        `https://instant-gram-backend.onrender.com/comment`,
         {
           method: "PUT",
           headers: {
@@ -93,7 +93,7 @@ const Post = ({ post, posts, setPosts }) => {
 
       try {
         const res = await fetch(
-          `https://instant-gram-backend.herokuapp.com/delete/${postId}`,
+          `https://instant-gram-backend.onrender.com/delete/${postId}`,
           {
             method: "DELETE",
             headers: {
@@ -126,7 +126,7 @@ const Post = ({ post, posts, setPosts }) => {
 
     try {
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/comment`,
+        `https://instant-gram-backend.onrender.com/comment`,
         {
           method: "DELETE",
           headers: {

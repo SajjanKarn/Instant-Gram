@@ -31,7 +31,7 @@ const Register = () => {
         confirmPassword: undefined,
       };
 
-      fetch(`https://instant-gram-backend.herokuapp.com/signup`, {
+      fetch(`https://instant-gram-backend.onrender.com/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

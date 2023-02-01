@@ -18,7 +18,7 @@ const ResetPassword = () => {
   const checkLink = async () => {
     try {
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/check-link`,
+        `https://instant-gram-backend.onrender.com/check-link`,
         {
           method: "POST",
           headers: {
@@ -55,7 +55,7 @@ const ResetPassword = () => {
 
     try {
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/reset-password`,
+        `https://instant-gram-backend.onrender.com/reset-password`,
         {
           method: "PUT",
           headers: {

@@ -15,7 +15,7 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUserPosts = () => {
-      fetch(`https://instant-gram-backend.herokuapp.com/mypost`, {
+      fetch(`https://instant-gram-backend.onrender.com/mypost`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -39,7 +39,7 @@ const Profile = () => {
     try {
       setDeletingUser(true);
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/deleteuser`,
+        `https://instant-gram-backend.onrender.com/deleteuser`,
         {
           method: "DELETE",
           headers: {

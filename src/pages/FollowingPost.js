@@ -12,7 +12,7 @@ const FollowingPost = () => {
 
   useEffect(() => {
     const fetchAllPost = () => {
-      fetch(`https://instant-gram-backend.herokuapp.com/followingpost`, {
+      fetch(`https://instant-gram-backend.onrender.com/followingpost`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

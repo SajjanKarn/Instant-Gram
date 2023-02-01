@@ -11,7 +11,7 @@ const UserFollowing = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://instant-gram-backend.herokuapp.com/myfollowing`, {
+    fetch(`https://instant-gram-backend.onrender.com/myfollowing`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

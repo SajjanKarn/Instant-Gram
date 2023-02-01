@@ -24,7 +24,7 @@ const SearchUser = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `https://instant-gram-backend.herokuapp.com/search`,
+        `dhttps://instant-gram-backend.onrender.com/search`,
         {
           method: "POST",
           headers: {
